@@ -14,17 +14,32 @@ public class Vista extends javax.swing.JFrame {
     /**
      * Creates new form NewJFrame
      */
+    // Vistas y controlador creados una sola vez
+    private VistaV vistaVendedor = new VistaV();
+    private VistaC vistaComprador = new VistaC();
+    private Controlador controlador;
+
     public Vista() {
-        
         initComponents();
-        VistaV v1 = new VistaV();
-        v1.setSize(488, 364);
-        v1.setLocation(0, 0);
+
+        // BorderLayout para que el sub-panel ocupe todo el espacio
+        contenido.setLayout(new java.awt.BorderLayout());
+
+        // Ocultar el panel de contenido hasta que el usuario elija una vista
+        contenido.setVisible(false);
+
+        // Crear el controlador pasándole las dos vistas
+        controlador = new Controlador(vistaVendedor, vistaComprador);
+    }
+
+    /** Método auxiliar para cambiar el panel visible en 'contenido' */
+    private void mostrarPanel(javax.swing.JPanel panel) {
         contenido.removeAll();
-        contenido.add(v1);
+        contenido.add(panel, java.awt.BorderLayout.CENTER);
+        contenido.setVisible(true);
         contenido.revalidate();
         contenido.repaint();
-
+        pack(); // Reajusta el tamaño de la ventana
     }
 
     /**
@@ -141,25 +156,11 @@ public class Vista extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void BotonCompradorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BotonCompradorActionPerformed
-        VistaC v2 = new VistaC();
-        v2.setSize(488, 364);
-        v2.setLocation(0, 0);
-        contenido.removeAll();
-        contenido.add(v2);
-        contenido.revalidate();
-        contenido.repaint();
-        
+        mostrarPanel(vistaComprador);
     }//GEN-LAST:event_BotonCompradorActionPerformed
 
     private void BotonVendedorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BotonVendedorActionPerformed
-
-        VistaV v1 = new VistaV();
-        v1.setSize(488, 364);
-        v1.setLocation(0, 0);
-        contenido.removeAll();
-        contenido.add(v1);
-        contenido.revalidate();
-        contenido.repaint();
+        mostrarPanel(vistaVendedor);
     }//GEN-LAST:event_BotonVendedorActionPerformed
 
     /**

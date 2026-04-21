@@ -54,11 +54,7 @@ public class VistaV extends javax.swing.JPanel {
 
         jLabel8.setText("Lista de productos:");
 
-        jList2.setModel(new javax.swing.AbstractListModel<String>() {
-            String[] strings = { "." };
-            public int getSize() { return strings.length; }
-            public String getElementAt(int i) { return strings[i]; }
-        });
+        jList2.setName(""); // NOI18N
         jScrollPane2.setViewportView(jList2);
 
         jButton2.setBackground(new java.awt.Color(153, 255, 153));
@@ -159,9 +155,43 @@ public class VistaV extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        // TODO add your handling code here:
+        // La lógica la gestiona el Controlador mediante el listener registrado
     }//GEN-LAST:event_jButton2ActionPerformed
 
+    // ── Métodos públicos para el Controlador ─────────────────────────────────
+
+    /** Devuelve el texto del campo Nombre */
+    public String getNombre() {
+        return jTextField4.getText().trim();
+    }
+
+    /** Devuelve el texto del campo Precio */
+    public String getPrecio() {
+        return jTextField5.getText().trim();
+    }
+
+    /** Devuelve el texto del campo Stock */
+    public String getStock() {
+        return jTextField6.getText().trim();
+    }
+
+    /** Limpia los tres campos de texto */
+    public void limpiarCampos() {
+        jTextField4.setText("");
+        jTextField5.setText("");
+        jTextField6.setText("");
+        jTextField4.requestFocus();
+    }
+
+    /** Actualiza la JList con el modelo proporcionado */
+    public void actualizarLista(javax.swing.DefaultListModel<String> modelo) {
+        jList2.setModel(modelo);
+    }
+
+    /** Registra el ActionListener del botón Añadir desde el Controlador */
+    public void setControlador(java.awt.event.ActionListener listener) {
+        jButton2.addActionListener(listener);
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel contenido2;
